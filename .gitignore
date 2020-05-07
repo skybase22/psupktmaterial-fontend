@@ -1,0 +1,8 @@
+/build
+/node_modules
+package-lock.json
+/.firebase
+/firebase.json
+/.firebaserc
+# Local Netlify folder
+.netlify

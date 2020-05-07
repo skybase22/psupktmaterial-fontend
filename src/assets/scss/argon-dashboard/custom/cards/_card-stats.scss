@@ -1,0 +1,70 @@
+//
+// Card stats
+//
+
+.card-stats {
+    .card-body {
+        padding: 1rem 1.5rem;
+    }
+
+    .card-status-bullet {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+    }
+
+    &:hover {
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 4px 16px;
+      }
+}
+
+.card-qr-code {
+    &:hover {
+    transform: translateY(-10px);
+    transition: all 0.3s ease-out;
+    }
+}
+
+.card-button-add-qr {
+
+    background-color: rgb(255, 255, 255);
+    color:#2dce89;
+
+    &:hover {
+        background-color:#2dce89;
+        color:white;    
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 4px 16px;
+        transform: translateY(-5px);
+        transition: all 0.5s ease-out;
+      }
+}
+
+.card-button-add-qr-print {
+
+    background-color: rgb(255, 255, 255);
+    color:#5e72e4;
+
+    &:hover {
+        background-color:#5e72e4;
+        color:white;    
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 4px 16px;
+        transform: translateY(-5px);
+        transition: all 0.5s ease-out;
+      }
+}
+
+.card-button-add-qr-select {
+
+    background-color: rgb(255, 255, 255);
+    color:#f5365c;
+
+    &:hover {
+        background-color:#f5365c;
+        color:white;    
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 4px 16px;
+        transform: translateX(5px);
+        transition: all 0.5s ease-out;
+      }
+}
