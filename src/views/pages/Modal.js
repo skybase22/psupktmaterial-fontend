@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
-import { firebase } from '../../firebase'
 import {
     Button,
     Modal,
@@ -31,6 +30,7 @@ const ModalQR = (props) => {
         modalTitle,
         modalType,
         modalSize,
+        getData,
     } = props;
 
     var {
@@ -460,18 +460,7 @@ const ModalQR = (props) => {
                                         })}
                                     </div>
                                 </PrintComponents>
-                            ) : modalType === "show data" ? (
-                                <Link to="/material/">
-                                <button type="button" className="btn btn-danger" onClick={async (e) => {
-                                    e.preventDefault()
-                                    await firebase.database().ref("myMaterial/" + dataQR.id).remove()
-                                    // props.fetchDataInIndex()
-                                    toggle()
-
-                                }}>DELETE</button>
-                                </Link>
                             ) : (
-                                        // <Button color="primary" onClick={toggle}>OK</Button>
                                         null
                                     )}
                             <Button color="secondary" onClick={toggle} >Cancel</Button>

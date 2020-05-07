@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 
 import {
   Button,
@@ -16,6 +17,11 @@ import {
   ListGroupItem,
   CardTitle,
   Alert,
+  buttonLabel,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader
 } from "reactstrap";
 
 // core components
@@ -65,7 +71,8 @@ class Edit extends React.Component {
       visible: false,
       success: "",
       id: "",
-      value:"",
+      value: "",
+      modalDelete: false,
     }
   }
 
@@ -108,6 +115,12 @@ class Edit extends React.Component {
       } else {
         this.props.history.push('/auth/login')
       }
+    })
+  }
+
+  toggleModalDelete = () => {
+    this.setState({
+      modalDelete: !this.state.modalDelete
     })
   }
 
@@ -440,14 +453,13 @@ class Edit extends React.Component {
                       <h3 className="mb-0">Edit Material</h3>
                     </Col>
                     <Col className="text-right" xs="4">
-                      <Button
-                        color="primary"
+                      <button
+                        className="btn btn-primary"
                         href="#pablo"
                         onClick={e => this.onUpdate()}
-                        size="sm"
                       >
                         EDIT
-                      </Button>
+                      </button>
                     </Col>
                   </Row>
                 </CardHeader>
@@ -729,12 +741,46 @@ class Edit extends React.Component {
                           </FormGroup>
                         </Col>
                       </Row>
+                      {this.state.id !== "" ? (
+                        <Row>
+                          <Col className="ml-auto " xl="2">
+                            <div className="d-flex justify-content-end">
+                              <FormGroup className="ml-auto">
+
+                                <button type="button" className="btn btn-danger" onClick={
+                                  this.toggleModalDelete
+                                }>DELETE</button>
+
+                              </FormGroup>
+                            </div>
+                          </Col>
+                        </Row>
+                      ) : (null)}
                     </div>
                   </Form>
                 </CardBody>
               </Card>
             </Col>
           </Row>
+          <div>
+            <Modal isOpen={this.state.modalDelete} toggle={this.toggleModalDelete} >
+              <ModalHeader toggle={this.toggleModalDelete}>Delete Material</ModalHeader>
+              <ModalBody>
+                Are you sure to delete this material?
+              </ModalBody>
+              <ModalFooter>
+                <Link to="/material/index">
+                  <Button color="primary" onClick={() => {
+                    if (this.state.id !== "") {
+                      this.toggleModalDelete()
+                      firebase.database().ref("myMaterial/" + this.state.id).remove()
+                    }
+                  }}>OK</Button>{' '}
+                </Link>
+                <Button color="secondary" onClick={this.toggleModalDelete}>Cancel</Button>
+              </ModalFooter>
+            </Modal>
+          </div>
         </Container>
       </>
     );

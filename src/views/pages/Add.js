@@ -104,7 +104,7 @@ class Add extends React.Component {
           durableCode: this.state.copyData.durableCode,
           listMaterial: this.state.copyData.listMaterial,
           attribute: this.state.copyData.attribute,
-          serialNumber: this.state.copyData.selectModal,
+          serialNumber: this.state.copyData.serialNumber,
           price: this.state.copyData.price,
           storageLocation: this.state.copyData.storageLocation,
           numberPieces: this.state.copyData.numberPieces,
