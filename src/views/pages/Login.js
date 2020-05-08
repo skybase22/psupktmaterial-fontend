@@ -1,7 +1,6 @@
 import React from "react";
 import { firebase } from '../../firebase/index'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
 // reactstrap components
 import {
   Button,
@@ -14,7 +13,6 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Row,
   Col,
   Spinner
 } from "reactstrap";

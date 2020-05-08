@@ -8,8 +8,6 @@ import {
     InputGroupAddon,
     Input,
     InputGroupText,
-    Col,
-    Alert
 } from "reactstrap";
 
 import ModalQR from '../views/pages/Modal'
@@ -792,7 +790,10 @@ class Page extends React.Component {
                                             <Input placeholder="Search" type="text" onChange={async (e) => {
                                                 await this.setState({ inputSearch: e.target.value })
                                                 let arr = []
-
+                                                if(this.state.inputSearch === ""){
+                                                    this.handleSelectBeforeClear()
+                                                    this.handleSelectAfterClear()
+                                                }
                                                 if ((this.state.dateBefore === "") && (this.state.dateAfter === "")) {
                                                     await this.setState({
                                                         data: this.state.dataForSearchDate
@@ -846,7 +847,10 @@ class Page extends React.Component {
                                                 <Input placeholder="Search" type="text" onChange={async (e) => {
                                                     await this.setState({ inputSearch: e.target.value })
                                                     let arr = []
-
+                                                    if(this.state.inputSearch === ""){
+                                                        this.handleSelectBeforeClear()
+                                                        this.handleSelectAfterClear()
+                                                    }
                                                     if ((this.state.dateBefore === "") && (this.state.dateAfter === "")) {
                                                         await this.setState({
                                                             data: this.state.dataForSearchDate

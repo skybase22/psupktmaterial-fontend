@@ -2,8 +2,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
-import { Container, Row, Col, NavbarBrand } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Container, Row, Col} from "reactstrap";
 // core components
 import AuthFooter from "components/Footers/AuthFooter.js";
 

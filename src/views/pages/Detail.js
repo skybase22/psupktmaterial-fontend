@@ -24,7 +24,7 @@ import Header from "components/Headers/Header.js";
 import { firebase } from '../../firebase'
 
 class Detail extends React.Component {
-
+  _isMounted = false;
   constructor(props) {
     super(props)
     this.state = {
@@ -65,6 +65,7 @@ class Detail extends React.Component {
       visible: false,
       success: "",
       id: "",
+      textAlert:"",
     }
   }
 
@@ -93,6 +94,17 @@ class Detail extends React.Component {
                 dateUpdate: snapshot.val().dateUpdate,
               })
             } else {
+              this.setState({
+                visible: !this.state.visible,
+                success: "danger",
+                textAlert: "ไม่มีครุภัณฑ์ที่เลือก"
+              }, () => {
+                setTimeout(() => {
+                  this.setState({
+                    visible: !this.state.visible
+                  })
+                }, 2000)
+              })
             }
           })
         }
@@ -132,7 +144,17 @@ class Detail extends React.Component {
             dateUpdate: snapshot.val().dateUpdate,
           })
         } else {
-          console.log("err");
+          this.setState({
+            visible: !this.state.visible,
+            success: "danger",
+            textAlert: "ไม่มีครุภัณฑ์ที่เลือก"
+          }, () => {
+            setTimeout(() => {
+              this.setState({
+                visible: !this.state.visible
+              })
+            }, 2000)
+          })
         }
       })
         .then(() => {
@@ -141,6 +163,18 @@ class Detail extends React.Component {
         .catch((error) => {
           console.log("err", error);
         })
+    } else {
+      this.setState({
+        visible: !this.state.visible,
+        success: "danger",
+        textAlert: "กรุณาเลือกครุภัณฑ์"
+      }, () => {
+        setTimeout(() => {
+          this.setState({
+            visible: !this.state.visible
+          })
+        }, 2000)
+      })
     }
   }
 
@@ -193,6 +227,53 @@ class Detail extends React.Component {
                     </Row>
                   </CardBody>
                 </Card>
+              </Col>
+              <Col lg="6" md="6">
+                {this.state.visible === false ? (
+                  <Row className="" style={{ marginBottom: "3rem", minHeight: "55px" }} >
+                    <div>
+
+                    </div>
+                  </Row>
+                ) : (
+
+                    <Row className="" style={{ marginBottom: "2rem" }} >
+                      <Col className="ml-auto">
+                        {this.state.success === "success" ? (
+                          <Alert color="success" isOpen={this.state.visible} toggle={() => {
+                            this.setState({
+                              visible: !this.state.visible
+                            })
+                          }}>
+                            แก้ไขครุภัณฑ์สำเร็จ!
+                          </Alert>
+                        ) : this.state.success === "danger" ? (
+                          <Alert color="danger" isOpen={this.state.visible} toggle={() => {
+                            this.setState({
+                              visible: !this.state.visible
+                            })
+                          }}>
+                            {this.state.id === "" ? (
+                              <>
+                                {this.state.textAlert}
+                              </>
+                            ) : this.state.durableCode === "" ? (
+                              <>
+                                {this.state.textAlert}
+
+                              </>
+                            ) : (
+                                  <>
+                                    {this.state.textAlert}
+
+                                  </>
+                                )}
+
+                          </Alert>
+                        ) : (null)}
+                      </Col>
+                    </Row>
+                  )}
               </Col>
             </Row>
           </div>

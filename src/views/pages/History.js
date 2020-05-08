@@ -3,24 +3,12 @@ import React from "react";
 
 // reactstrap components
 import {
-  Badge,
   Card,
   CardHeader,
-  CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Progress,
   Table,
   Container,
   Row,
-  UncontrolledTooltip,
-  Spinner,
   Form,
   FormGroup,
   Input,
@@ -37,6 +25,7 @@ import Page from '../page'
 
 
 class History extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {

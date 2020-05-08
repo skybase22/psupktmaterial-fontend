@@ -6,27 +6,20 @@ import { firebase } from '../firebase'
 import Page from './page.js'
 
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
-  NavItem,
-  NavLink,
-  Nav,
-  // Progress,
-  // Table,
   Container,
   Row,
   Col,
-  Spinner,
   CardTitle,
-  Form, FormGroup, Label, Input, FormText,
+  Form, FormGroup, Input, 
   InputGroupAddon,
   InputGroupText,
   InputGroup,
   Table,
   Progress,
-  Media,
+
 } from "reactstrap";
 
 
@@ -242,7 +235,7 @@ class Index extends React.Component {
                 </Card>
               </Col>
               <Col >
-                <Card style={{ minHeight: "150px" }} className="card-stats mb-4 mb-xl-0">
+                <Card style={{ minHeight: "150px", minWidth: "300px" }} className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">

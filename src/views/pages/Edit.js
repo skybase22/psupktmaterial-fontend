@@ -17,7 +17,6 @@ import {
   ListGroupItem,
   CardTitle,
   Alert,
-  buttonLabel,
   Modal,
   ModalBody,
   ModalFooter,
@@ -30,7 +29,7 @@ import Header from "components/Headers/Header.js";
 import { firebase } from '../../firebase'
 
 class Edit extends React.Component {
-
+  _isMounted = false;
   constructor(props) {
     super(props)
     this.state = {
@@ -73,6 +72,7 @@ class Edit extends React.Component {
       id: "",
       value: "",
       modalDelete: false,
+      textAlert: ""
     }
   }
 
@@ -109,6 +109,17 @@ class Edit extends React.Component {
                 value: snapshot.val().value
               })
             } else {
+              this.setState({
+                visible: !this.state.visible,
+                success: "danger",
+                textAlert: "ไม่มีครุภัณฑ์ที่เลือก"
+              }, () => {
+                setTimeout(() => {
+                  this.setState({
+                    visible: !this.state.visible
+                  })
+                }, 2000)
+              })
             }
           })
         }
@@ -192,15 +203,36 @@ class Edit extends React.Component {
             value: snapshot.val().value
           })
         } else {
-          console.log("err");
+          this.setState({
+            visible: !this.state.visible,
+            success: "danger",
+            textAlert: "ไม่มีครุภัณฑ์ที่เลือก"
+          }, () => {
+            setTimeout(() => {
+              this.setState({
+                visible: !this.state.visible
+              })
+            }, 2000)
+          })
         }
       })
         .then(() => {
-          console.log("success");
         })
         .catch((error) => {
           console.log("err", error);
         })
+    } else {
+      this.setState({
+        visible: !this.state.visible,
+        success: "danger",
+        textAlert: "กรุณาเลือกครุภัณฑ์"
+      }, () => {
+        setTimeout(() => {
+          this.setState({
+            visible: !this.state.visible
+          })
+        }, 2000)
+      })
     }
   }
 
@@ -315,10 +347,23 @@ class Edit extends React.Component {
         other: "",
         imageURL: "",
       })
-    } else {
+    } else if (this.state.id === "") {
       this.setState({
         visible: !this.state.visible,
-        success: "danger"
+        success: "danger",
+        textAlert: "กรุณาเลือกครุภัณฑ์"
+      }, () => {
+        setTimeout(() => {
+          this.setState({
+            visible: !this.state.visible
+          })
+        }, 2000)
+      })
+    } else if (this.state.durableCode === "") {
+      this.setState({
+        visible: !this.state.visible,
+        success: "danger",
+        textAlert: "กรุณาใส่รหัสครุภัณฑ์"
       }, () => {
         setTimeout(() => {
           this.setState({
@@ -367,7 +412,6 @@ class Edit extends React.Component {
                       <Col className="text-right" xs="4">
                         <Button
                           color="primary"
-                          // href="#pablo"
                           onClick={() => this.getMaterial()}
                           size="sm"
                         >
@@ -386,7 +430,6 @@ class Edit extends React.Component {
                             id="input-selectMaterial"
                             placeholder="ID"
                             type="text"
-                          // onKeyDown={this.keyPress}
                           />
                         </Form>
                       </Col>
@@ -421,15 +464,17 @@ class Edit extends React.Component {
                           }}>
                             {this.state.id === "" ? (
                               <>
-                                กรุณาเลือกครุภัณฑ์!
+                                {this.state.textAlert}
                               </>
                             ) : this.state.durableCode === "" ? (
                               <>
-                                กรุณาใส่รหัสครุภัณฑ์!
+                                {this.state.textAlert}
+
                               </>
                             ) : (
                                   <>
-                                    มีข้อผิดพลาดเกิดขึ้น!
+                                    {this.state.textAlert}
+
                                   </>
                                 )}
 
@@ -455,7 +500,6 @@ class Edit extends React.Component {
                     <Col className="text-right" xs="4">
                       <button
                         className="btn btn-primary"
-                        href="#pablo"
                         onClick={e => this.onUpdate()}
                       >
                         EDIT

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { Link } from "react-router-dom"
 import {
     Button,
@@ -8,12 +8,10 @@ import {
     ModalFooter,
     Form,
     FormGroup,
-    Label,
     CustomInput,
     Badge,
     Row,
     Col,
-    Input,
     ListGroupItem
 } from 'reactstrap';
 import { QRCode } from "react-qr-svg";
@@ -30,7 +28,6 @@ const ModalQR = (props) => {
         modalTitle,
         modalType,
         modalSize,
-        getData,
     } = props;
 
     var {

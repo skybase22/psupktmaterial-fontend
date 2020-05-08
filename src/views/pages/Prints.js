@@ -1,7 +1,6 @@
 
 import React from "react";
 // react component that copies the given text inside your clipboard
-import { CopyToClipboard } from "react-copy-to-clipboard";
 // reactstrap components
 import {
   Card,
@@ -10,16 +9,9 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip,
   CardTitle,
   Button,
-  Badge,
-  Modal, ModalHeader, ModalBody, ModalFooter,
-  Form,
-  FormGroup,
-  CustomInput,
   Progress,
-  CardFooter
 } from "reactstrap";
 
 import { firebase } from '../../firebase'
@@ -31,6 +23,7 @@ import ModalQR from '../pages/Modal'
 import update from 'immutability-helper';
 
 class Prints extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props)
     this.state = {
@@ -115,6 +108,7 @@ class Prints extends React.Component {
   }
 
   componentDidMount = () => {
+    this._isMounted = true;
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.fetchData()
@@ -122,6 +116,10 @@ class Prints extends React.Component {
         this.props.history.push('/auth/login')
       }
     })
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   fetchData = () => {

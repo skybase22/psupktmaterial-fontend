@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom"
 // reactstrap components
-import { Container, Row, Col, Nav, NavItem, NavLink } from "reactstrap";
+import {Row, Col} from "reactstrap";
 
 class Footer extends React.Component {
   render() {
@@ -13,11 +13,9 @@ class Footer extends React.Component {
             <div className="copyright text-center text-xl-left text-muted">
               © 2020{" "}
               <Link to="/material/index">
-              <a
-                className="font-weight-bold ml-1"
-              >
+
                 PSU MATERIAL
-              </a>
+
               </Link>
 
             </div>

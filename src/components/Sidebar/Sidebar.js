@@ -12,26 +12,16 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Media,
   NavbarBrand,
   Navbar,
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col
 } from "reactstrap";
-
-var ps;
 
 class Sidebar extends React.Component {
   state = {
@@ -79,7 +69,7 @@ class Sidebar extends React.Component {
 
   render() {
 
-    const { bgColor, routes, logo } = this.props;
+    const {routes, logo } = this.props;
     console.log("this.props",this.props);
     
     let navbarBrandProps;

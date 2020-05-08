@@ -24,7 +24,7 @@ import Header from "components/Headers/Header.js";
 import { firebase } from '../../firebase'
 
 class Add extends React.Component {
-
+  _isMounted = false;
   constructor(props) {
     super(props)
     this.state = {
@@ -328,7 +328,6 @@ class Add extends React.Component {
                       </Button>
                           <Button
                             color="success"
-                            href="#pablo"
                             onClick={e => this.onUpdate()}
                             size="sm"
                           >
