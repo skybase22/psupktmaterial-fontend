@@ -37,7 +37,6 @@ class Auth extends React.Component {
         <div className="main-content mb-5">
           <div className="bg-gradient-info">
             <img style={{ maxHeight: "100px", marginTop: "1rem" }} alt="..." src={require("assets/img/brand/cropped-PSU_PHUKET-EN.png")} />
-
           </div>
           <div className="header bg-gradient-info py-7 py-lg-8">
             <div className="mt--2">
