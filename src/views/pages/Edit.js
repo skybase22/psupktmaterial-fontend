@@ -72,7 +72,8 @@ class Edit extends React.Component {
       id: "",
       value: "",
       modalDelete: false,
-      textAlert: ""
+      textAlert: "",
+      userEmail: ""
     }
   }
 
@@ -81,6 +82,9 @@ class Edit extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.getNumberFirebase()
+        this.setState({
+          userEmail: user.email
+        })
         if (this.props.history.location.search.startsWith('?id=')) {
           let query = this.props.history.location.search.split('?id=')
           this.setState({
@@ -513,279 +517,448 @@ class Edit extends React.Component {
                       User information
                     </h6> */}
                     <div className="pl-lg-4">
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-durableCode"
-                            >
-                              รหัสครุภัณฑ์
+                      {this.state.userEmail === "admin@email.com" ? (
+                        <>
+                          <Row>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-durableCode"
+                                >
+                                  รหัสครุภัณฑ์
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.durableCode}
-                              name="durableCode"
-                              id="input-durableCode"
-                              placeholder="รหัสครุภัณฑ์"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-listMaterial"
-                            >
-                              รายการ
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.durableCode}
+                                  name="durableCode"
+                                  id="input-durableCode"
+                                  placeholder="รหัสครุภัณฑ์"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-listMaterial"
+                                >
+                                  รายการ
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.listMaterial}
-                              name="listMaterial"
-                              id="input-listMaterial"
-                              placeholder="รายการ"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-first-name"
-                            >
-                              คณะ/หน่วยงาน
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.listMaterial}
+                                  name="listMaterial"
+                                  id="input-listMaterial"
+                                  placeholder="รายการ"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-first-name"
+                                >
+                                  คณะ/หน่วยงาน
                             </label>
-                            <Input
-                              type="select"
-                              onChange={this.handleInput}
-                              value={this.state.department}
-                              name="department"
-                              id="departmentSelect">
-                              <option value="-">-</option>
-                              <option value="งานพัสดุ">งานพัสดุ</option>
+                                <Input
+                                  type="select"
+                                  onChange={this.handleInput}
+                                  value={this.state.department}
+                                  name="department"
+                                  id="departmentSelect">
+                                  <option value="-">-</option>
+                                  <option value="งานพัสดุ">งานพัสดุ</option>
 
-                              <option value="วิทยาลัยชุมชนภูเก็ต">วิทยาลัยชุมชนภูเก็ต</option>
-                              <option value="วิทยาลัยการคอมพิวเตอร์">วิทยาลัยการคอมพิวเตอร์</option>
+                                  <option value="วิทยาลัยชุมชนภูเก็ต">วิทยาลัยชุมชนภูเก็ต</option>
+                                  <option value="วิทยาลัยการคอมพิวเตอร์">วิทยาลัยการคอมพิวเตอร์</option>
 
-                              <option value="คณะการบริการและการท่องเที่ยว">คณะการบริการและการท่องเที่ยว</option>
-                              <option value="คณะเทคโนโลยีและสิ่งแวดล้อม">คณะเทคโนโลยีและสิ่งแวดล้อม</option>
-                              <option value="คณะวิเทศศึกษา">คณะวิเทศศึกษา</option>
-                              <option value="ศูนย์กิจการนานาชาติ">ศูนย์กิจการนานาชาติ</option>
+                                  <option value="คณะการบริการและการท่องเที่ยว">คณะการบริการและการท่องเที่ยว</option>
+                                  <option value="คณะเทคโนโลยีและสิ่งแวดล้อม">คณะเทคโนโลยีและสิ่งแวดล้อม</option>
+                                  <option value="คณะวิเทศศึกษา">คณะวิเทศศึกษา</option>
+                                  <option value="ศูนย์กิจการนานาชาติ">ศูนย์กิจการนานาชาติ</option>
 
-                              <option value="ศูนย์การเรียนรู้ (งานเทคโนโลยีสารสนเทศ)">ศูนย์การเรียนรู้ (งานเทคโนโลยีสารสนเทศ)</option>
-                              <option value="ศูนย์การเรียนรู้ งานโสตทัศนูปกรณ์">ศูนย์การเรียนรู้ งานโสตทัศนูปกรณ์</option>
-                              <option value="ศูนย์การเรียนรู้ งานห้องสมุด">ศูนย์การเรียนรู้ งานห้องสมุด</option>
-                              <option value="ศูนย์การเรียนรู้ งานเทคโนโลยีสารสนเทศ">ศูนย์การเรียนรู้ งานเทคโนโลยีสารสนเทศ</option>
+                                  <option value="ศูนย์การเรียนรู้ (งานเทคโนโลยีสารสนเทศ)">ศูนย์การเรียนรู้ (งานเทคโนโลยีสารสนเทศ)</option>
+                                  <option value="ศูนย์การเรียนรู้ งานโสตทัศนูปกรณ์">ศูนย์การเรียนรู้ งานโสตทัศนูปกรณ์</option>
+                                  <option value="ศูนย์การเรียนรู้ งานห้องสมุด">ศูนย์การเรียนรู้ งานห้องสมุด</option>
+                                  <option value="ศูนย์การเรียนรู้ งานเทคโนโลยีสารสนเทศ">ศูนย์การเรียนรู้ งานเทคโนโลยีสารสนเทศ</option>
 
-                              <option value="งานเทคโนโลยีสารสนเทศ">งานเทคโนโลยีสารสนเทศ</option>
-                              <option value="งานบริหารทรัพย์สิน">งานบริหารทรัพย์สิน</option>
-                              <option value="งานบริหารทรัพย์สิน(สะพานหิน)">งานบริหารทรัพย์สิน(สะพานหิน)</option>
-                              <option value="งานบริการวิชาการและประชาสัมพันธ์">งานบริการวิชาการและประชาสัมพันธ์</option>
+                                  <option value="งานเทคโนโลยีสารสนเทศ">งานเทคโนโลยีสารสนเทศ</option>
+                                  <option value="งานบริหารทรัพย์สิน">งานบริหารทรัพย์สิน</option>
+                                  <option value="งานบริหารทรัพย์สิน(สะพานหิน)">งานบริหารทรัพย์สิน(สะพานหิน)</option>
+                                  <option value="งานบริการวิชาการและประชาสัมพันธ์">งานบริการวิชาการและประชาสัมพันธ์</option>
 
-                              <option value="กองกลาง งานอาคาร">กองกลาง งานอาคาร</option>
-                              <option value="กองกลาง งานแผนและประกนัคุณภาพ">กองกลาง งานแผนและประกนัคุณภาพ</option>
-                              <option value="กองกลาง งานเลขานุการและสารบรรณ)">กองกลาง งานเลขานุการและสารบรรณ</option>
-                              <option value="กองกลาง งานประชาสัมพันธ์">กองกลาง งานประชาสัมพันธ์</option>
-                              <option value="กองกลาง งานบริหารงานบุคคล">กองกลาง กองกลาง งานบริหารงานบุคคล</option>
-                              <option value="กองกลาง งานอนามัยและพยาบาล">กองกลาง งานอนามัยและพยาบาล</option>
-                              <option value="กองกลาง งานการเงินและพัสดุ(การเงิน)">กองกลาง งานการเงินและพัสดุ(การเงิน)</option>
-                              <option value="กองกลาง งานการเงินและพัสดุ(พัสดุ)">กองกลาง งานการเงินและพัสดุ(พัสดุ)</option>
+                                  <option value="กองกลาง งานอาคาร">กองกลาง งานอาคาร</option>
+                                  <option value="กองกลาง งานแผนและประกนัคุณภาพ">กองกลาง งานแผนและประกนัคุณภาพ</option>
+                                  <option value="กองกลาง งานเลขานุการและสารบรรณ)">กองกลาง งานเลขานุการและสารบรรณ</option>
+                                  <option value="กองกลาง งานประชาสัมพันธ์">กองกลาง งานประชาสัมพันธ์</option>
+                                  <option value="กองกลาง งานบริหารงานบุคคล">กองกลาง กองกลาง งานบริหารงานบุคคล</option>
+                                  <option value="กองกลาง งานอนามัยและพยาบาล">กองกลาง งานอนามัยและพยาบาล</option>
+                                  <option value="กองกลาง งานการเงินและพัสดุ(การเงิน)">กองกลาง งานการเงินและพัสดุ(การเงิน)</option>
+                                  <option value="กองกลาง งานการเงินและพัสดุ(พัสดุ)">กองกลาง งานการเงินและพัสดุ(พัสดุ)</option>
 
-                              <option value="กองวิชาการ งานหลักสูตรและสหกิจศึกษา">กองวิชาการงานหลักสูตรและสหกิจศึกษา</option>
-                              <option value="กองวิชาการ งานรับนักศึกษาและทะเบียนกลาง">กองวิชาการ งานรับนักศึกษาและทะเบียนกลาง</option>
-                              <option value="กองวิชาการ งานพัฒนาอาจารย์แลบะบริการวิชาการ">กองวิชาการ งานพัฒนาอาจารย์แลบะบริการวิชาการ</option>
+                                  <option value="กองวิชาการ งานหลักสูตรและสหกิจศึกษา">กองวิชาการงานหลักสูตรและสหกิจศึกษา</option>
+                                  <option value="กองวิชาการ งานรับนักศึกษาและทะเบียนกลาง">กองวิชาการ งานรับนักศึกษาและทะเบียนกลาง</option>
+                                  <option value="กองวิชาการ งานพัฒนาอาจารย์แลบะบริการวิชาการ">กองวิชาการ งานพัฒนาอาจารย์แลบะบริการวิชาการ</option>
 
-                              <option value="กองกิจการนักศึกษา งานพัฒนานักศึกษา">กองกิจการนักศึกษา งานพัฒนานักศึกษา</option>
-                              <option value="กองกิจการนักศึกษา งานกิจกรรมนักศึกษา">กองกิจการนักศึกษา งานกิจกรรมนักศึกษา</option>
-                            </Input>
-                          </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-attribute"
-                            >
-                              ยี่ห้อ/ชนิด/ขนาด/คุณลักษณะ
+                                  <option value="กองกิจการนักศึกษา งานพัฒนานักศึกษา">กองกิจการนักศึกษา งานพัฒนานักศึกษา</option>
+                                  <option value="กองกิจการนักศึกษา งานกิจกรรมนักศึกษา">กองกิจการนักศึกษา งานกิจกรรมนักศึกษา</option>
+                                </Input>
+                              </FormGroup>
+                            </Col>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-attribute"
+                                >
+                                  ยี่ห้อ/ชนิด/ขนาด/คุณลักษณะ
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.attribute}
-                              name="attribute"
-                              id="input-attribute"
-                              placeholder="ยี่ห้อ/ชนิด/ขนาด/คุณลักษณะ"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-serialNumber"
-                            >
-                              หมายเลขเครื่อง
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.attribute}
+                                  name="attribute"
+                                  id="input-attribute"
+                                  placeholder="ยี่ห้อ/ชนิด/ขนาด/คุณลักษณะ"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-serialNumber"
+                                >
+                                  หมายเลขเครื่อง
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.serialNumber}
-                              name="serialNumber"
-                              id="input-serialNumber"
-                              placeholder="หมายเลขเครื่อง"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-price"
-                            >
-                              ราคาต่อหน่วย
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.serialNumber}
+                                  name="serialNumber"
+                                  id="input-serialNumber"
+                                  placeholder="หมายเลขเครื่อง"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-price"
+                                >
+                                  ราคาต่อหน่วย
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.price}
-                              name="price"
-                              id="input-price"
-                              placeholder="ราคาต่อหน่วย"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-numberPieces"
-                            >
-                              จำนวน
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.price}
+                                  name="price"
+                                  id="input-price"
+                                  placeholder="ราคาต่อหน่วย"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-numberPieces"
+                                >
+                                  จำนวน
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.numberPieces}
-                              name="numberPieces"
-                              id="input-numberPieces"
-                              placeholder="จำนวน"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-dateAccept"
-                            >
-                              วันที่ตรวจรับ
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.numberPieces}
+                                  name="numberPieces"
+                                  id="input-numberPieces"
+                                  placeholder="จำนวน"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-dateAccept"
+                                >
+                                  วันที่ตรวจรับ
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.dateAccept}
-                              name="dateAccept"
-                              id="input-dateAccept"
-                              placeholder="วันที่ตรวจรับ"
-                              type="date"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-company"
-                            >
-                              บริษัท/ห้างร้าน/ที่จัดซื้อ
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.dateAccept}
+                                  name="dateAccept"
+                                  id="input-dateAccept"
+                                  placeholder="วันที่ตรวจรับ"
+                                  type="date"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-company"
+                                >
+                                  บริษัท/ห้างร้าน/ที่จัดซื้อ
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.company}
-                              name="company"
-                              id="input-company"
-                              placeholder="บริษัท/ห้างร้าน/ที่จัดซื้อ"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-storageLocation"
-                            >
-                              สถานที่เก็บ
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.company}
+                                  name="company"
+                                  id="input-company"
+                                  placeholder="บริษัท/ห้างร้าน/ที่จัดซื้อ"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-storageLocation"
+                                >
+                                  สถานที่เก็บ
                             </label>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInput}
-                              value={this.state.storageLocation}
-                              name="storageLocation"
-                              id="input-storageLocation"
-                              placeholder="สถานที่เก็บ"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
-                            <ListGroupItem>
-                              <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
-                            </ListGroupItem>
-                            <CustomInput onChange={this.handleImage}
-                              className="mt-3"
-                              type="file"
-                              id="exampleCustomFileBrowser"
-                              name="customFile" />
-                          </FormGroup>
-                        </Col>
-                        <Col>
-                          <FormGroup>
-                            <Label for="exampleCheckbox">สถานะครุภัณฑ์</Label>
-                            <div>
-                              <CustomInput value="ปกติ" checked={this.state.materialStatus === 'ปกติ' && this.state.other === ""} onChange={this.handleInput} type="radio" id="ปกติ" name="materialStatus" label="ปกติ" />
-                              <CustomInput value="ชำรุด" checked={this.state.materialStatus === 'ชำรุด' && this.state.other === ""} onChange={this.handleInput} type="radio" id="ชำรุด" name="materialStatus" label="ชำรุด" />
-                              <CustomInput value="รอจำหน่าย" checked={this.state.materialStatus === 'รอจำหน่าย' && this.state.other === ""} onChange={this.handleInput} type="radio" id="รอจำหน่าย" name="materialStatus" label="รอจำหน่าย" />
-                              <CustomInput value="โอนย้าย" checked={this.state.materialStatus === 'โอนย้าย' && this.state.other === ""} onChange={this.handleInput} type="radio" id="โอนย้าย" name="materialStatus" label="โอนย้าย" />
-                              <CustomInput value="อื่น ๆ" checked={this.state.other !== ''} onChange={this.handleInput} type="radio" id="อื่น ๆ" name="other" label="อื่น ๆ" />
-                            </div>
-                          </FormGroup>
-                          <FormGroup>
-                            <Input
-                              className="form-control-alternative"
-                              onChange={this.handleInputOther}
-                              value={this.state.other}
-                              name="other"
-                              id="input-other"
-                              placeholder=""
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      {this.state.id !== "" ? (
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.storageLocation}
+                                  name="storageLocation"
+                                  id="input-storageLocation"
+                                  placeholder="สถานที่เก็บ"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col lg="6">
+                              <FormGroup>
+                                <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
+                                <ListGroupItem>
+                                  <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
+                                </ListGroupItem>
+                                <CustomInput onChange={this.handleImage}
+                                  className="mt-3"
+                                  type="file"
+                                  id="exampleCustomFileBrowser"
+                                  name="customFile" />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Label for="exampleCheckbox">สถานะครุภัณฑ์</Label>
+                                <div>
+                                  <CustomInput value="ปกติ" checked={this.state.materialStatus === 'ปกติ' && this.state.other === ""} onChange={this.handleInput} type="radio" id="ปกติ" name="materialStatus" label="ปกติ" />
+                                  <CustomInput value="ชำรุด" checked={this.state.materialStatus === 'ชำรุด' && this.state.other === ""} onChange={this.handleInput} type="radio" id="ชำรุด" name="materialStatus" label="ชำรุด" />
+                                  <CustomInput value="รอจำหน่าย" checked={this.state.materialStatus === 'รอจำหน่าย' && this.state.other === ""} onChange={this.handleInput} type="radio" id="รอจำหน่าย" name="materialStatus" label="รอจำหน่าย" />
+                                  <CustomInput value="โอนย้าย" checked={this.state.materialStatus === 'โอนย้าย' && this.state.other === ""} onChange={this.handleInput} type="radio" id="โอนย้าย" name="materialStatus" label="โอนย้าย" />
+                                  <CustomInput value="อื่น ๆ" checked={this.state.other !== ''} onChange={this.handleInput} type="radio" id="อื่น ๆ" name="other" label="อื่น ๆ" />
+                                </div>
+                              </FormGroup>
+                              <FormGroup>
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInputOther}
+                                  value={this.state.other}
+                                  name="other"
+                                  id="input-other"
+                                  placeholder=""
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </>
+                      ) : (
+                        <>
+                        <Row>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-durableCode"
+                              >
+                                รหัสครุภัณฑ์
+                          </label>
+                              <ListGroupItem style={{minHeight:"62px"}}>{this.state.durableCode}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-listMaterial"
+                              >
+                                รายการ
+                          </label>
+                              <ListGroupItem  style={{minHeight:"62px"}}>{this.state.listMaterial}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-first-name"
+                              >
+                                คณะ/หน่วยงาน
+                          </label>
+                              <ListGroupItem style={{minHeight:"62px"}}>{this.state.department}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-attribute"
+                              >
+                                ยี่ห้อ/ชนิด/ขนาด/คุณลักษณะ
+                          </label>
+                              <ListGroupItem  style={{minHeight:"62px"}}>{this.state.attribute}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-serialNumber"
+                              >
+                                หมายเลขเครื่อง
+                          </label>
+                              <ListGroupItem style={{minHeight:"62px"}}>{this.state.serialNumber}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-price"
+                              >
+                                ราคาต่อหน่วย
+                          </label>
+                              <ListGroupItem style={{minHeight:"62px"}}>{this.state.price}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-numberPieces"
+                              >
+                                จำนวน
+                          </label>
+                              <ListGroupItem style={{minHeight:"62px"}}>{this.state.numberPieces}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-dateAccept"
+                              >
+                                วันที่ตรวจรับ
+                          </label>
+                              <ListGroupItem style={{minHeight:"62px"}}>{this.state.dateAccept}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-company"
+                              >
+                                บริษัท/ห้างร้าน/ที่จัดซื้อ
+                          </label>
+                              <ListGroupItem style={{minHeight:"62px"}}>{this.state.company}</ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                          <Col lg="6">
+                            <FormGroup>
+                              <label
+                                className="form-control-label"
+                                htmlFor="input-storageLocation"
+                              >
+                                สถานที่เก็บ
+                          </label>
+                              <Input 
+                                className="form-control-alternative"
+                                onChange={this.handleInput}
+                                value={this.state.storageLocation}
+                                name="storageLocation"
+                                id="input-storageLocation"
+                                placeholder="สถานที่เก็บ"
+                                type="text"
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col lg="6">
+                            <FormGroup>
+                              <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
+                              <ListGroupItem>
+                                <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
+                              </ListGroupItem>
+                            </FormGroup>
+                          </Col>
+                          <Col>
+                            <FormGroup>
+                              <Label for="exampleCheckbox">สถานะครุภัณฑ์</Label>
+                              <div>
+                                <CustomInput value="ปกติ" checked={this.state.materialStatus === 'ปกติ' && this.state.other === ""} onChange={this.handleInput} type="radio" id="ปกติ" name="materialStatus" label="ปกติ" />
+                                <CustomInput value="ชำรุด" checked={this.state.materialStatus === 'ชำรุด' && this.state.other === ""} onChange={this.handleInput} type="radio" id="ชำรุด" name="materialStatus" label="ชำรุด" />
+                                <CustomInput value="รอจำหน่าย" checked={this.state.materialStatus === 'รอจำหน่าย' && this.state.other === ""} onChange={this.handleInput} type="radio" id="รอจำหน่าย" name="materialStatus" label="รอจำหน่าย" />
+                                <CustomInput value="โอนย้าย" checked={this.state.materialStatus === 'โอนย้าย' && this.state.other === ""} onChange={this.handleInput} type="radio" id="โอนย้าย" name="materialStatus" label="โอนย้าย" />
+                                <CustomInput value="อื่น ๆ" checked={this.state.other !== ''} onChange={this.handleInput} type="radio" id="อื่น ๆ" name="other" label="อื่น ๆ" />
+                              </div>
+                            </FormGroup>
+                            <FormGroup>
+                              <Input
+                                className="form-control-alternative"
+                                onChange={this.handleInputOther}
+                                value={this.state.other}
+                                name="other"
+                                id="input-other"
+                                placeholder=""
+                                type="text"
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                      </>
+                        )}
+
+                      {(this.state.id !== "") && (this.state.userEmail === "admin@email.com") ? (
                         <Row>
                           <Col className="ml-auto " xl="2">
                             <div className="d-flex justify-content-end">

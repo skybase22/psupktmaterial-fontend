@@ -12,7 +12,6 @@ import {
   Row,
   Col,
   Label,
-  CustomInput,
   ListGroupItem,
   CardTitle,
   Alert,
@@ -483,11 +482,6 @@ class Detail extends React.Component {
                             <ListGroupItem>
                               <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
                             </ListGroupItem>
-                            <CustomInput onChange={this.handleImage}
-                              className="mt-3"
-                              type="file"
-                              id="exampleCustomFileBrowser"
-                              name="customFile" />
                           </FormGroup>
                         </Col>
                         <Col>

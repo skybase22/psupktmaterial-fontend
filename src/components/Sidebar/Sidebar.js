@@ -70,8 +70,6 @@ class Sidebar extends React.Component {
   render() {
 
     const {routes, logo } = this.props;
-    console.log("this.props",this.props);
-    
     let navbarBrandProps;
     if (logo && logo.innerLink) {
       navbarBrandProps = {
