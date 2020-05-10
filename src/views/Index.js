@@ -2,7 +2,7 @@
 import React from "react";
 
 import { firebase } from '../firebase'
-
+import ReactExport from "react-export-excel"
 import Page from './page.js'
 
 import {
@@ -13,7 +13,7 @@ import {
   Row,
   Col,
   CardTitle,
-  Form, FormGroup, Input, 
+  Form, FormGroup, Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
@@ -24,7 +24,9 @@ import {
 
 
 import Header from "components/Headers/Header.js";
-
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -69,6 +71,7 @@ class Index extends React.Component {
       allCounter: 0,
       newMaterial: "",
       _isMounted: true,
+      setDateUpdate: "",
     };
   }
 
@@ -155,10 +158,10 @@ class Index extends React.Component {
         this.setState({ error: true })
       }
     }).then(() => {
-      this.setState({ allData: arr })
       this.setState({
         counter: this.state.allData.length,
-        allCounter: arr.length
+        allCounter: arr.length,
+        allData: arr
       })
 
       let arr2 = arr.sort((a, b) => {
@@ -312,11 +315,11 @@ class Index extends React.Component {
                       ) : (
                           <>
                             <Col className="mb--3" lg="3">
-                            <Progress animated style={{ maxWidth: "60%", marginTop: "1rem" }} striped color="primary" value={100} />
+                              <Progress animated style={{ maxWidth: "60%", marginTop: "1rem" }} striped color="primary" value={100} />
 
                             </Col>
                             <Col lg="9">
-                            <Progress animated style={{ maxWidth: "30%", marginTop: "1rem" }} striped color="light" value={100} />
+                              <Progress animated style={{ maxWidth: "30%", marginTop: "1rem" }} striped color="light" value={100} />
 
                             </Col>
                           </>
@@ -334,15 +337,41 @@ class Index extends React.Component {
 
         <Container fluid >
           <Row className="mt-5">
-            <Col className="mb-5 mb-xl-0" xl="12">
+            <Col className=" mb-xl-0" xl="12">
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
-                    <div className="col-6">
+                    <Col lg="12">
+                      <div className="d-flex justify-content-between">
+                      <div>
                       <h2 className="mb-0">List Material</h2>
-                    </div>
-                    <div className="col-6 text-right">
-                    </div>
+                      </div>
+                      <div >
+                          <ExcelFile element={<button className="btn btn-outline-primary">Download Data</button>}>
+                            <ExcelSheet data={this.state.allData} name="Employees">
+                              <ExcelColumn label="ID" value="id" />
+                              <ExcelColumn label="รหัสครุภัณฑ์" value="durableCode" />
+                              <ExcelColumn label="รายการ" value="listMaterial" />
+                              <ExcelColumn label="คณะ/หน่วยงาน" value="department" />
+                              <ExcelColumn label="ลักษณะ" value="attribute" />
+                              <ExcelColumn label="หมายเลขเครื่อง" value="serialNumber" />
+                              <ExcelColumn label="ราคา" value="price" />
+                              <ExcelColumn label="จำนวน" value="numberPieces" />
+                              <ExcelColumn label="วันที่ตรวจรับ" value="dateAccept" />
+                              {/* <ExcelColumn label="วันที่อัปเดต" value="dateUpdate" /> */}
+                              <ExcelColumn label="ชื่อผู้เบิกครภัณฑ์" value="namePickUp" />
+                              <ExcelColumn label="บริษัท" value="company" />
+                              <ExcelColumn label="สถานที่เก็บ" value="storageLocation" />
+                              <ExcelColumn label="สถานะครุภัณฑ์" value="materialStatus" />
+                              <ExcelColumn label="ลิงค์รูปภาพ" value="imageURL" />
+                              <ExcelColumn label="url" value="value" />
+                              <ExcelColumn label="อื่น ๆ" value="other" />
+                            </ExcelSheet>
+                          </ExcelFile>
+                      </div>
+                      </div>
+                      
+                    </Col>
                   </Row>
                 </CardHeader>
                 {this.state.error ?
@@ -364,11 +393,11 @@ class Index extends React.Component {
 
                     </div>
                     ) :
-                    (<div>
-                      <Row>
+                    (<div >
+                      <Row style={{ padding: "0px 20px 20px 20px", }} >
                         {/* <div> */}
-                        <div className="col" style={{}} lg="3" md="12">
-                          <Form style={{ padding: "0px 20px 20px 20px", minWidth: "250px", maxWidth: "400px" }} >
+                        <div className="col" style={{marginTop: "10px" }} lg="3" md="12">
+                          <Form style={{ minWidth: "250px", maxWidth: "400px" }} >
                             <FormGroup className="mb-0">
                               <InputGroup className="form-control-alternative">
                                 <InputGroupAddon addonType="prepend">
@@ -381,8 +410,8 @@ class Index extends React.Component {
                             </FormGroup>
                           </Form>
                         </div>
-                        <div className="col-auto" style={{}} lg="3" md="6">
-                          <Form style={{ padding: "0px 20px 20px 20px", minWidth: "250px" }} >
+                        <div style={{marginTop: "10px" }} className="col-auto" lg="3" md="6">
+                          <Form style={{ minWidth: "250px" }} >
                             <FormGroup className="mb-0">
                               <InputGroup className="form-control-alternative">
                                 <InputGroupAddon addonType="prepend">
@@ -400,11 +429,11 @@ class Index extends React.Component {
                             </FormGroup>
                           </Form>
                         </div>
-                        <div className="icon icon-shape rounded-circle shadow">
-                          <i className="fas fa-arrow-circle-right" style={{ height: "25px" }} />
+                        <div style={{ height: "25px", marginTop: "21px" }} className="icon icon-shape">
+                          <i className="fas fa-arrow-circle-right" />
                         </div>
-                        <div className="col-auto" style={{}} lg="3" md="6">
-                          <Form style={{ padding: "0px 20px 20px 20px", minWidth: "250px" }} >
+                        <div style={{marginTop: "10px" }} className="col-auto" lg="3" md="6">
+                          <Form style={{ minWidth: "250px" }} >
                             <FormGroup className="mb-0">
                               <InputGroup className="form-control-alternative">
                                 <InputGroupAddon addonType="prepend">

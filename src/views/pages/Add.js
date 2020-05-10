@@ -580,7 +580,7 @@ class Add extends React.Component {
                       <Row>
                         <Col lg="6">
                           <FormGroup>
-                            <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
+                            <Label className="form-control-label" for="exampleCustomFileBrowser">รูปภาพ</Label>
                             <CustomInput onChange={this.handleImage}
                               type="file"
                               id="exampleCustomFileBrowser"

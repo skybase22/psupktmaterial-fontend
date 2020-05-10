@@ -775,10 +775,10 @@ class Page extends React.Component {
         return (
             <div>
                 <div >
-                    <Row>
+                    <Row style={{ padding: "0px 20px 20px 20px",}}>
                         {/* <div> */}
-                        <div className="col" style={{}} lg="3" md="12">
-                            <Form style={{ padding: "0px 20px 20px 20px", minWidth: "250px", maxWidth: "400px" }} >
+                        <div className="col" style={{marginTop:"10px" }} lg="3" md="12">
+                            <Form style={{ minWidth: "250px", maxWidth: "400px" }} >
                                 <FormGroup className="mb-0">
                                     <InputGroup className="form-control-alternative">
                                         <InputGroupAddon addonType="prepend">
@@ -904,8 +904,8 @@ class Page extends React.Component {
                                 </FormGroup>
                             </Form>
                         </div>
-                        <div className="col-auto" style={{}} lg="3" md="6">
-                            <Form style={{ padding: "0px 20px 20px 20px", minWidth: "250px" }} >
+                        <div className="col-auto" style={{marginTop:"10px" }} lg="3" md="6">
+                            <Form style={{ minWidth: "250px", }} >
                                 <FormGroup className="mb-0">
                                     {this.props.table === "Index" ? (
                                         <InputGroup className="form-control-alternative">
@@ -978,11 +978,11 @@ class Page extends React.Component {
                                 </FormGroup>
                             </Form>
                         </div>
-                        <div className="icon icon-shape rounded-circle shadow">
-                            <i className="fas fa-arrow-circle-right" style={{ height: "25px" }} />
+                        <div style={{ height: "25px", marginTop:"21px" }} className="icon icon-shape">
+                            <i className="fas fa-arrow-circle-right"  />
                         </div>
-                        <div className="col-auto" style={{}} lg="3" md="6">
-                            <Form style={{ padding: "0px 20px 20px 20px", minWidth: "250px" }} >
+                        <div className="col-auto" style={{marginTop:"10px" }} lg="3" md="6">
+                            <Form style={{minWidth: "250px" }} >
                                 <FormGroup className="mb-0">
                                     {this.props.table === "Index" ? (
                                         <InputGroup className="form-control-alternative">
