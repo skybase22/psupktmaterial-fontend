@@ -315,11 +315,25 @@ const ModalQR = (props) => {
                                                         className="form-control-label"
                                                         htmlFor="input-storageLocation"
                                                     >
+                                                        ชื่อผู้เบิกครุภัณฑ์
+                                            </label>
+                                                    <ListGroupItem>{dataQR.namePickUp}</ListGroupItem>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col lg="12">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                        htmlFor="input-storageLocation"
+                                                    >
                                                         สถานะครุภัณฑ์
                                             </label>
                                                     <ListGroupItem>{dataQR.materialStatus}</ListGroupItem>
                                                 </FormGroup>
                                             </Col>
+                                        </Row>
+                                        <Row>
+                                            
                                             <Col>
                                                 <FormGroup>
                                                     <label

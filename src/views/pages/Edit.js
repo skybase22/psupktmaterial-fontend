@@ -335,22 +335,22 @@ class Edit extends React.Component {
       }
       );
 
-      this.setState({
-        listMaterial: "",
-        durableCode: "",
-        attribute: "",
-        serialNumber: "",
-        materialStatus: "",
-        price: "",
-        storageLocation: "",
-        numberPieces: "",
-        dateAccept: "",
-        namePickUp: "",
-        company: "",
-        department: "",
-        other: "",
-        imageURL: "",
-      })
+      // this.setState({
+      //   listMaterial: "",
+      //   durableCode: "",
+      //   attribute: "",
+      //   serialNumber: "",
+      //   materialStatus: "",
+      //   price: "",
+      //   storageLocation: "",
+      //   numberPieces: "",
+      //   dateAccept: "",
+      //   namePickUp: "",
+      //   company: "",
+      //   department: "",
+      //   other: "",
+      //   imageURL: "",
+      // })
     } else if (this.state.id === "") {
       this.setState({
         visible: !this.state.visible,
@@ -503,10 +503,10 @@ class Edit extends React.Component {
                     </Col>
                     <Col className="text-right" xs="4">
                       <button
-                        className="btn btn-primary"
+                        className="btn btn-success"
                         onClick={e => this.onUpdate()}
                       >
-                        EDIT
+                        SAVE
                       </button>
                     </Col>
                   </Row>
@@ -754,19 +754,6 @@ class Edit extends React.Component {
                             </Col>
                           </Row>
                           <Row>
-                            <Col lg="6">
-                              <FormGroup>
-                                <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
-                                <ListGroupItem>
-                                  <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
-                                </ListGroupItem>
-                                <CustomInput onChange={this.handleImage}
-                                  className="mt-3"
-                                  type="file"
-                                  id="exampleCustomFileBrowser"
-                                  name="customFile" />
-                              </FormGroup>
-                            </Col>
                             <Col>
                               <FormGroup>
                                 <Label for="exampleCheckbox">สถานะครุภัณฑ์</Label>
@@ -788,6 +775,40 @@ class Edit extends React.Component {
                                   placeholder=""
                                   type="text"
                                 />
+                              </FormGroup>
+                            </Col>
+                            <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-company"
+                                >
+                                  ชื่อผู้เบิกครุภัณฑ์
+                            </label>
+                                <Input
+                                  className="form-control-alternative"
+                                  onChange={this.handleInput}
+                                  value={this.state.namePickUp}
+                                  name="namePickUp"
+                                  id="input-namePicUp"
+                                  placeholder="ชื่อผู้เบิกครุภัณฑ์"
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                          <Col lg="6">
+                              <FormGroup>
+                                <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
+                                <ListGroupItem>
+                                  <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
+                                </ListGroupItem>
+                                <CustomInput onChange={this.handleImage}
+                                  className="mt-3"
+                                  type="file"
+                                  id="exampleCustomFileBrowser"
+                                  name="customFile" />
                               </FormGroup>
                             </Col>
                           </Row>

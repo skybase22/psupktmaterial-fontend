@@ -121,14 +121,13 @@ class Index extends React.Component {
           // var numberPath = data.val().id.toLocaleString(undefined, { minimumIntegerDigits: 5 }).replace(',', '')
           // console.log("nu", data.val().listMaterial);
           // var myImg = ""
-
-          // { data.val().imageURL === undefined ? (myImg = "") : (myImg = data.val().imageURL) }
+          // data.val().imageURL === undefined ? (myImg = "") : (myImg = data.val().imageURL) 
           // var firebaseRef = firebase.database().ref("myMaterial/" + numberPath);
-          // // var date = {}
+          // var date = new Date()
 
           // firebaseRef.set({
           //   id: data.val().id,
-          //   value: `https://psupktmaterial.herokuapp.com/material/detail?id=${data.key}`,
+          //   value: `https://psupktmaterial.firebaseapp.com/material/detail?id=${data.key}`,
           //   listMaterial: data.val().listMaterial,
           //   attribute: data.val().attribute,
           //   company: data.val().company,
@@ -144,10 +143,12 @@ class Index extends React.Component {
           //   imageURL: myImg,
           //   other: data.val().other,
           //   dateUpdate: {
-          //     day: new Date().getDate(),
-          //     month: (new Date().getMonth() + 1),
-          //     year: new Date().getFullYear(),
-          //     time: new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(),
+          //     day:(date.getDate() < 10 ? ("0" + date.getDate()) : (date.getDate())),
+          //     month:((date.getMonth() + 1) < 10 ? ("0" + (date.getMonth() + 1)) : (date.getMonth() + 1)),
+          //     year:date.getFullYear(),
+          //     time:(date.getHours() < 10 ? ("0" + date.getHours()):(date.getHours())) + ':' + 
+          //     (date.getMinutes() < 10 ? ("0" + date.getMinutes()):(date.getMinutes())) + ':' + 
+          //     (date.getSeconds() < 10 ? ("0" + date.getSeconds()):(date.getSeconds())),
           //   },
           //   // dateUpdate: new Date().getFullYear() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getDate() + ' ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds(),
           // }).then(() => {

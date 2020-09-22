@@ -121,7 +121,7 @@ class Detail extends React.Component {
   getMaterial = async () => {
     if (this.state.selectMaterial !== "") {
       let query = this.state.selectMaterial
-      firebase.database().ref("myURL/" + query).once('value', async (snapshot) => {
+      firebase.database().ref("myMaterial/" + query).once('value', async (snapshot) => {
         if (snapshot.exists()) {
           this.setState({ keyData: query })
           this.setState({
@@ -476,14 +476,7 @@ class Detail extends React.Component {
                         </Col>
                       </Row>
                       <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
-                            <ListGroupItem>
-                              <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
-                            </ListGroupItem>
-                          </FormGroup>
-                        </Col>
+                       
                         <Col>
                           <FormGroup>
                             <Label for="exampleCheckbox">สถานะครุภัณฑ์</Label>
@@ -494,6 +487,33 @@ class Detail extends React.Component {
                               placeholder=""
                               type="text"
                             />
+                          </FormGroup>
+                        </Col>
+                        <Col lg="6">
+                              <FormGroup>
+                                <label
+                                  className="form-control-label"
+                                  htmlFor="input-company"
+                                >
+                                  ชื่อผู้เบิกครุภัณฑ์
+                            </label>
+                                <Input
+                                  className="form-control-alternative"
+                                  defaultValue={this.state.namePickUp}
+                                  id="input-namePicUp"
+                                  placeholder=""
+                                  type="text"
+                                />
+                              </FormGroup>
+                            </Col>
+                      </Row>
+                      <Row>
+                      <Col lg="6">
+                          <FormGroup>
+                            <Label for="exampleCustomFileBrowser">รูปภาพ</Label>
+                            <ListGroupItem>
+                              <center><img src={this.state.imageURL || 'https://via.placeholder.com/256'} alt="Material" height="256" width="256" /></center>
+                            </ListGroupItem>
                           </FormGroup>
                         </Col>
                       </Row>

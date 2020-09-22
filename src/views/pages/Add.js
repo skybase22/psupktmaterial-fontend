@@ -15,7 +15,7 @@ import {
   Col,
   Label,
   CustomInput,
-  Alert
+  Alert,
 } from "reactstrap";
 
 // core components
@@ -64,6 +64,7 @@ class Add extends React.Component {
       visible: false,
       success: "",
       copyData: [],
+      userEmail: ""
     }
   }
 
@@ -71,6 +72,9 @@ class Add extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.getNumberFirebase()
+        this.setState({
+          userEmail: user.email
+        })
       } else {
         this.props.history.push('/auth/login')
       }
@@ -165,7 +169,14 @@ class Add extends React.Component {
 
       let key = newNumber.toLocaleString(undefined, { minimumIntegerDigits: 5 }).replace(',', '')
       let date = new Date()
+      var nameP = ""
+      if (this.state.userEmail === "admin@email.com") {
+        nameP = this.state.namePickUp
+      } else {
+        nameP = localStorage.getItem("name")
+      }
       if (this.state.durableCode !== "") {
+  
         firebaseRef.set({
           id: key,
           value: `https://psupktmaterial.herokuapp.com/material/detail?id=${key}`,
@@ -178,7 +189,7 @@ class Add extends React.Component {
           storageLocation: this.state.storageLocation,
           numberPieces: this.state.numberPieces,
           dateAccept: this.state.dateAccept,
-          namePickUp: localStorage.getItem("name"),
+          namePickUp: nameP,
           company: this.state.company,
           department: this.state.department,
           other: this.state.other,
@@ -325,13 +336,6 @@ class Add extends React.Component {
                             size="sm"
                           >
                             PASTE
-                      </Button>
-                          <Button
-                            color="success"
-                            onClick={e => this.onUpdate()}
-                            size="sm"
-                          >
-                            ADD
                       </Button>
                         </div>
 
@@ -578,6 +582,28 @@ class Add extends React.Component {
                         </Col>
                       </Row>
                       <Row>
+                        {this.state.userEmail === "admin@email.com" ? (
+                        <Col lg="6">
+                          <FormGroup>
+                                    <label
+                                      className="form-control-label"
+                                      htmlFor="input-namePicUp"
+                                    >
+                                      ชื่อผู้เบิกครุภัณฑ์
+                                    </label>
+                                    <Input
+                                      className="form-control-alternative"
+                                      onChange={this.handleInput}
+                                      value={this.state.namePickUp}
+                                      name="namePickUp"
+                                      id="input-namePickUp"
+                                      placeholder="ชื่อผู้เบิกครุภัณฑ์"
+                                      type="text"
+                                    />
+                          </FormGroup>
+                        </Col>
+                        ) : (null)}
+              
                         <Col lg="6">
                           <FormGroup>
                             <Label className="form-control-label" for="exampleCustomFileBrowser">รูปภาพ</Label>
@@ -590,6 +616,23 @@ class Add extends React.Component {
                       </Row>
                     </div>
                   </Form>
+                  <Row className="align-items-center">
+                    <Col style={{ paddingRight: "30px" }} className="text-right" xs="12">
+                      <Row >
+                        <div className="ml-auto">
+                          <Button
+                            color="success"
+                            onClick={e => this.onUpdate()}
+                            size="lm"
+                          >
+                            ADD
+                      </Button>
+                        </div>
+
+                      </Row>
+
+                    </Col>
+                  </Row>
                 </CardBody>
               </Card>
             </Col>
