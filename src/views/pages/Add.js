@@ -179,7 +179,7 @@ class Add extends React.Component {
   
         firebaseRef.set({
           id: key,
-          value: `https://psupktmaterial.herokuapp.com/material/detail?id=${key}`,
+          value: `https://psupktmaterial.firebaseapp.com/material/detail?id=${key}`,
           durableCode: this.state.durableCode,
           listMaterial: this.state.listMaterial,
           attribute: this.state.attribute,

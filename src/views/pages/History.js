@@ -213,7 +213,7 @@ class History extends React.Component {
   //       snapshot.forEach((data) => {
   //         arr.push({
   //           id: data.val().id,
-  //           value: `https://psupktmaterial.herokuapp.com/material/detail?id=${data.key}`,
+  //           value: `https://psupktmaterial.firebaseapp.com/material/detail?id=${data.key}`,
   //           listMaterial: data.val().listMaterial,
   //           attribute: data.val().attribute,
   //           company: data.val().company,

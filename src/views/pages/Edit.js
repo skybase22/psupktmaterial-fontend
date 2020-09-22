@@ -88,7 +88,7 @@ class Edit extends React.Component {
         if (this.props.history.location.search.startsWith('?id=')) {
           let query = this.props.history.location.search.split('?id=')
           this.setState({
-            urlQR: "https://psupktmaterial.herokuapp.com/material/detail?id=" + query[1]
+            urlQR: "https://psupktmaterial.firebaseapp.com/material/detail?id=" + query[1]
           })
           firebase.database().ref("myMaterial/" + query[1]).once('value', async (snapshot) => {
             if (snapshot.exists()) {
@@ -182,7 +182,7 @@ class Edit extends React.Component {
     if (this.state.selectMaterial !== "") {
       let query = this.state.selectMaterial
       this.setState({
-        urlQR: "https://psupktmaterial.herokuapp.com/material/detail?id=" + query
+        urlQR: "https://psupktmaterial.firebaseapp.com/material/detail?id=" + query
       })
       firebase.database().ref("myMaterial/" + query).once('value', async (snapshot) => {
         if (snapshot.exists()) {
